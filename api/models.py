@@ -70,9 +70,24 @@ class Account(AbstractBaseUser):
 
 
 
+class Student(models.Model):
+    name = models.CharField(max_length=255)
+    phone = models.IntegerField()
+    email = models.EmailField(max_length=255, unique=True)
+    dob = models.DateTimeField()
+    parent_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+    
+
+
 
 class StudentDetails(models.Model):
-    name = models.ForeignKey(Account,on_delete=models.CASCADE)
+    name = models.ForeignKey(Student,on_delete=models.CASCADE)
     subject = models.CharField(max_length=255)
     mark = models.IntegerField()
     year = models.IntegerField()
+
+    def __str__(self):
+        return self.subject
